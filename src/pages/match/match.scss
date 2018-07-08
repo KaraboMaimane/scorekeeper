@@ -1,0 +1,74 @@
+page-match {
+    ion-content{
+        background: url("../../assets/imgs/quino-al-517733-unsplash.jpg");
+        background-size: cover;
+        backface-visibility: hidden;
+        animation: fd .6s ease-in-out;
+    }
+    #battle{
+        height: 13rem;
+        width: 8rem;
+    }
+
+    .heading{
+        text-align: center;
+        font-size: 3rem;
+        padding-top: 2rem;
+    }
+
+    .container{
+        display: flex;
+        justify-content: center;
+    }
+
+    #vs{
+       height: 15rem; 
+    }
+
+    .score{
+        font-size: 1.9rem;
+        text-align: center;
+        padding-top: 2rem;
+        letter-spacing: .4rem;
+    }
+
+    .scoreValue{
+        text-align: center;
+        font-size: 8rem;
+        font-weight: 700;
+    }
+
+    ion-card.card.card-md{
+        background: rgba(255, 255, 255, 0.95);
+    }
+
+    .contain{
+        text-align: center;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.3);
+        height: 67.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+    }
+
+    .contain h1{
+        font-size: 3rem;
+    }
+    .contain h2{
+        font-size: 2rem;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    .subScore{
+        text-align: center;
+        font-size: 3rem;
+        font-weight: 500;
+    }
+
+    .side{
+        font-size: 6rem;
+    }
+}

@@ -1,0 +1,60 @@
+page-home {
+    ion-content{
+        background-image:linear-gradient(
+            rgba(0, 0, 0, 0.5), 
+            rgba(255, 0, 0, 0.3)
+          ), url("../../assets/imgs/edgar-pimenta-539077-unsplash.jpg");
+        background-size: cover;
+        background-position-x: right;
+        font-size: 10px;
+        backface-visibility: hidden;
+        animation: .5s ease-in-out fd;
+    }
+
+    #headingText{
+        color: white;
+        font-size: 4rem;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 500;
+        letter-spacing: .5rem;
+    }
+
+    #flex{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 65rem;
+    }
+
+    #container{
+        width: 65rem;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 5rem;
+    }
+
+    .item-md{
+        padding: 0;
+        margin: 0;
+        background: rgba(255, 255, 255, 0.08);
+        border: none;
+        border-radius: .3rem;
+        height: 1rem;
+        color: white;
+        font-size: 2.5rem;
+    }
+
+    #label{
+        color: white;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: .3rem;
+        font-weight: 500;
+    }
+
+    #button{
+        font-size: 2rem;
+        letter-spacing: .2rem;
+    }
+
+}

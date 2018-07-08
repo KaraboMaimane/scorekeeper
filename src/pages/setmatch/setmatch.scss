@@ -1,0 +1,38 @@
+page-setmatch {
+    ion-content{
+        backface-visibility: hidden;
+        animation: fd .6s ease-in-out;
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)
+          ),url("../../assets/imgs/craig-boudreaux-527407-unsplash.jpg");
+          background-size: cover;
+        padding: 2rem;
+    }
+    .heading, header{
+        font-size: 1.9rem;
+        text-align: center;
+        padding-top: 2rem;
+        letter-spacing: .4rem;
+    }
+
+    ion-card.card.card-md{
+        background: rgba(255, 255, 255, 0.7);
+    }
+    
+    .score{
+        text-align: center;
+        font-size: 8rem;
+        font-weight: 700;
+    }
+
+    .content{
+        padding: 3rem;
+    }
+
+    .mainHeading{
+        font-size: 4rem;
+        text-align: center;
+        color: white;
+        
+    }
+}
