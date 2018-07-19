@@ -26,3 +26,5 @@ export class Fixture{
     }
 }
 
+let fixtures = [];
+export default fixtures;

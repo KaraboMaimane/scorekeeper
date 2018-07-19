@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
-import { SetmatchPage } from '../setmatch/setmatch';
 import { Match } from '../../assets/match';
+import { SetmatchPage } from '../setmatch/setmatch';
 
 /**
  * Generated class for the MatchPage page.
@@ -15,240 +15,182 @@ import { Match } from '../../assets/match';
   selector: 'page-match',
   templateUrl: 'match.html',
 })
-export class MatchPage {
-  //setting up our variables
-  selected = 'none';
-  home = 'home';
-  away = 'away';
-  homeVal: number = 0;
-  awayVal: number = 0;
+
+export class MatchPage implements OnInit {
+  team: string = 'No Advantage';
+  //home team vars
+  homeTeam: string = 'Karabos Elites';
+  homeScore: number = 0;
   homeTries: number = 0;
-  homeConversions: number = 0;
-  awayTries: number = 0;
-  awayConversions: number = 0;
+  homeConversion: number = 0;
   homePenalties: number = 0;
+  //away team vars
+  awayTeam: string = 'Tiger Boys';
+  awayScore: number = 0;
+  awayTries: number = 0;
+  awayConversion: number = 0;
   awayPenalties: number = 0;
-  homeScores = [];
-  awayScores = [];
 
+  constructor(public navCtrl: NavController, private toastCtrl: ToastController, private alertCtrl: AlertController, private navParams: NavParams) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController) {
   }
 
-  ionViewDidEnter() {
-    this.home = this.navParams.get('home');
-    this.away = this.navParams.get('away');
-    const info = this.alertCtrl.create({
-      title: 'Instructions',
-      subTitle: `How the scoring system works: <br>
-      1.Select the Red or Blue icon with the running man <br>
-      2.Choose what function to apply to the selected side <br>
-      3.Enjoy the app!!!
-      `
+  ngOnInit() {
+    this.homeTeam = this.navParams.get('home');
+    this.awayTeam = this.navParams.get('away');
+    const alert = this.alertCtrl.create({
+      title: 'How To Work This App',
+      subTitle: `
+      1. Select a side by choosing one of these running men on the screen<br>
+      2. Select whatever action that is desired in the match either try, conversion, penalty and ultimately undo<br>
+      3.Enjoy the app!!!`,
+      buttons: ['OK']
     });
-    info.present();
+    alert.present();
   }
 
-  selectHome() {
-    if (this.selected == 'none' || this.selected == 'away') {
-      this.selected = 'home';
+  checkTry() {
+    if (this.team == 'home') {
+      this.homeScore += 5;
+      this.homeTries++;
+    } else if (this.team == 'away') {
+      this.awayScore += 5;
+      this.awayTries++;
+    } else {
+      const toast = this.toastCtrl.create({
+        duration: 1000,
+        message: 'No team advantage... Pick a side'
+      });
+      toast.present();
     }
   }
 
-  selectAway() {
-    if (this.selected == 'none' || this.selected == 'home') {
-      this.selected = 'away';
+  undoTry() {
+    if (this.team == 'home' && this.homeTries > 0) {
+      this.homeScore -= 5;
+      this.homeTries--;
+    } else if (this.team == 'away' && this.awayTries > 0) {
+      this.awayScore -= 5;
+      this.awayTries--;
+    } else {
+      const toast = this.toastCtrl.create({
+        message: 'Nothing to undo here...',
+        duration: 2000
+      });
+      toast.present();
     }
   }
 
-  scoreTry() {
-    if (this.selected == 'home') {
-      const alert = this.alertCtrl.create({
-        title: 'Conversion',
-        subTitle: 'Was the conversion scored???',
-        buttons: [
-          {
-            text: 'Missed',
-            role: 'cancel',
-            handler: data => {
-              this.homeVal += 5;
-              this.homeScores.push(this.homeVal);
-              this.homeTries++;
-            }
-          },
-          {
-            text: 'Scored!!!',
-            handler: data => {
-              this.homeVal += 7;
-              this.homeScores.push(this.homeVal);
-              this.homeTries++;
-              this.homeConversions++;
-              this.presentToast();
-            }
-          }
-        ]
+  checkPenalty() {
+    if (this.team == 'home') {
+      this.homeScore += 3;
+      this.homePenalties++;
+    } else if (this.team == 'away') {
+      this.awayScore += 3;
+      this.awayPenalties++;
+    } else {
+      const toast = this.toastCtrl.create({
+        duration: 1000,
+        message: 'No team advantage... Pick a side'
       });
-      alert.present();
-    } else if (this.selected == 'away') {
-      const alert = this.alertCtrl.create({
-        title: 'Conversion',
-        subTitle: 'Was the conversion scored???',
-        buttons: [
-          {
-            text: 'Missed',
-            role: 'cancel',
-            handler: data => {
-              this.awayVal += 5;
-              this.awayScores.push(this.awayVal);
-              this.awayTries++;
-            }
-          },
-          {
-            text: 'Scored!!!',
-            handler: data => {
-              this.awayVal += 7;
-              this.awayScores.push(this.awayScores);
-              this.awayTries++;
-              this.awayConversions++;
-            }
-          }
-        ]
-      });
-      alert.present();
-    } else{
-      this.warning();
+      toast.present();
     }
   }
 
-  penalty() {
-    if (this.selected == 'home') {
-      const alert = this.alertCtrl.create({
-        title: 'Penalty',
-        subTitle: 'Was the penalty scored???',
-        buttons: [
-          {
-            text: 'Missed',
-            role: 'cancel',
-            handler: data => {
-            }
-          },
-          {
-            text: 'Scored!!!',
-            handler: data => {
-              this.homeVal += 3;
-              this.homeScores.push(this.homeVal);
-              this.homePenalties++;
-            }
-          }
-        ]
+  undoPenalty() {
+    if (this.team == 'home' && this.homePenalties > 0) {
+      this.homeScore -= 3;
+      this.homePenalties--;
+    } else if (this.team == 'away' && this.awayPenalties > 0) {
+      this.awayScore -= 3;
+      this.awayPenalties--;
+    } else {
+      const toast = this.toastCtrl.create({
+        message: 'Nothing to undo here...',
+        duration: 2000
       });
-      alert.present();
-    } else if (this.selected == 'away') {
-      const alert = this.alertCtrl.create({
-        title: 'Penalty',
-        subTitle: 'Was the penalty scored???',
-        buttons: [
-          {
-            text: 'Missed',
-            role: 'cancel',
-            handler: data => {
-            }
-          },
-          {
-            text: 'Scored!!!',
-            handler: data => {
-              this.awayVal += 3;
-              this.awayScores.push(this.awayVal);
-              this.awayPenalties++;
-            }
-          }
-        ]
-      });
-      alert.present();
+      toast.present();
     }
   }
 
-  undo() {
-    if (this.selected == 'home' && this.homeScores.length > 0) {
-        this.homeVal = this.homeScores.pop();
-    } else if (this.selected == 'away' && this.awayScores.length > 0) {
-      this.awayVal = this.awayScores.pop();
+  checkConversion() {
+    if (this.team == 'home') {
+      this.homeScore += 2;
+      this.homeConversion++;
+    } else if (this.team == 'away') {
+      this.awayScore += 2;
+      this.awayConversion++;
+    } else {
+      const toast = this.toastCtrl.create({
+        duration: 1000,
+        message: 'No team advantage... Pick a side'
+      });
+      toast.present();
     }
   }
 
-  presentToast() {
-    const toast = this.toastCtrl.create({
-      message: 'Try has been scored',
-      duration: 1500,
-      position: 'bottom'
-    });
-    toast.present();
-  }
-  warning() {
-    const toast = this.toastCtrl.create({
-      message: 'Select a team!!!',
-      duration: 1500,
-      position: 'bottom'
-    });
-    toast.present();
+  undoConversion() {
+    if (this.team == 'home' && this.homeConversion > 0) {
+      this.homeScore -= 2;
+      this.homeConversion--;
+    } else if (this.team == 'away' && this.awayConversion > 0) {
+      this.awayScore -= 2;
+      this.awayConversion--;
+    } else {
+      const toast = this.toastCtrl.create({
+        message: 'Nothing to undo here...',
+        duration: 2000
+      });
+      toast.present();
+    }
   }
 
-  end(){
-    if( this.homeVal > this.awayVal){
+  endMatch() {
+    if (this.homeScore > this.awayScore) {
       const alert = this.alertCtrl.create({
-        title: 'Home Team Wins',
-        subTitle: this.home +  ' wins the match!!!'
+        title: 'Winner!!!',
+        subTitle: 'The winner for this match was ' + this.homeTeam,
+        buttons: ['OK']
       });
       alert.present();
 
-      let homeTeamStats = new Match(this.home, this.homeVal, this.homeTries, this.homeConversions, this.homePenalties);
-      let awayTeamStats = new Match(this.away, this.awayVal, this.awayTries, this.awayConversions, this.awayPenalties);
-
+      let homeTeamStats = new Match(this.homeTeam, this.homeScore, this.homeTries, this.homeConversion, this.homePenalties);
+      let awayTeamStats = new Match(this.awayTeam, this.awayScore, this.awayTries, this.awayConversion, this.awayPenalties);
       this.navCtrl.push(SetmatchPage, {
+        victor: this.homeTeam,
         homeTeamStats: homeTeamStats,
-        awayTeamStats: awayTeamStats,
-        victor: this.home
+        awayTeamStats: awayTeamStats
       });
 
-      //resetting all of our values
-      this.homeVal = 0;
-      this.awayVal = 0;
-      this.homeTries = 0;
-      this.homeConversions = 0;
-      this.awayTries = 0;
-      this.awayConversions = 0;
-      this.homePenalties = 0;
-      this.awayPenalties = 0;
-      this.homeScores = [];
-      this.awayScores = [];
-    }else{
+    } else if (this.awayScore > this.homeScore) {
       const alert = this.alertCtrl.create({
-        title: 'The Away team wins',
-        subTitle: this.away + ' wins the match!!!'
+        title: 'Winner!!!',
+        subTitle: 'The winner for this match was ' + this.awayTeam,
+        buttons: ['OK']
+      });
+      alert.present();
+      let homeTeamStats = new Match(this.homeTeam, this.homeScore, this.homeTries, this.homeConversion, this.homePenalties);
+      let awayTeamStats = new Match(this.awayTeam, this.awayScore, this.awayTries, this.awayConversion, this.awayPenalties);
+      this.navCtrl.push(SetmatchPage, {
+        victor: this.awayTeam,
+        homeTeamStats: homeTeamStats,
+        awayTeamStats: awayTeamStats
+      });
+    } else if (this.awayScore == this.homeScore) {
+      const alert = this.alertCtrl.create({
+        title: 'Draw',
+        subTitle: 'Unfortunately for this match we dont have a victor!!!',
+        buttons: ['OK']
       });
       alert.present();
 
-      let homeTeamStats = new Match(this.home, this.homeVal, this.homeTries, this.homeConversions, this.homePenalties);
-      let awayTeamStats = new Match(this.away, this.awayVal, this.awayTries, this.awayConversions, this.awayPenalties);
-      
+      let homeTeamStats = new Match(this.awayTeam, this.homeScore, this.homeTries, this.homeConversion, this.homePenalties);
+      let awayTeamStats = new Match(this.awayTeam, this.awayScore, this.awayTries, this.awayConversion, this.awayPenalties);
       this.navCtrl.push(SetmatchPage, {
+        victor: 'none',
         homeTeamStats: homeTeamStats,
-        awayTeamStats: awayTeamStats,
-        victor: this.away
+        awayTeamStats: awayTeamStats
       });
-
-      //resetting all of our values
-      this.homeVal = 0;
-      this.awayVal = 0;
-      this.homeTries = 0;
-      this.homeConversions = 0;
-      this.awayTries = 0;
-      this.awayConversions = 0;
-      this.homePenalties = 0;
-      this.awayPenalties = 0;
-      this.homeScores = [];
-      this.awayScores = [];
     }
-    
   }
 }

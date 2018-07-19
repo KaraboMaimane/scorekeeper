@@ -1,25 +1,21 @@
 <ion-content padding>
-  <h1 class="mainHeading">Match fixture standings: </h1>
-  <ion-grid>
-  <ion-row>
-    <ion-col col-xs-12 col-sm-12 col-md-6 col-lg-6>
-      <ion-card *ngFor="let fixture of fixtures; let i = index">
-        <div class="content">
-        <h1 class="header">Match {{i + 1}}: <br> {{ fixture.homeTeamStats.name}} VS {{ fixture.awayTeamStats.name }}</h1>
-        <ion-card-content>
-          <h4 class="heading">Score:</h4>
-          <p class="score">{{ fixture.homeTeamStats.score}} - {{ fixture.awayTeamStats.score}}</p>
-          <h4 class="heading">Tries:</h4>
-          <p class="score">{{ fixture.homeTeamStats.tries}} - {{ fixture.awayTeamStats.tries}}</p>
-          <h4 class="heading">Conversions</h4>
-          <p class="score">{{ fixture.homeTeamStats.conversions}} - {{ fixture.awayTeamStats.conversions}}</p>
-          <h4 class="heading">Penalties</h4>
-          <p class="score">{{ fixture.homeTeamStats.penalties}} - {{ fixture.awayTeamStats.penalties }}</p>
-          <h1 class="header">The Victors Are: {{ fixture.victor }}</h1>
-        </ion-card-content>
+  <div class="wrapper">
+    <h1 class="mainHeading">Match fixture standings: </h1>
+    <div class="cardflex">
+      <div class="content" *ngFor="let fixture of fixtures; let i = index">
+        <h1 class="header">Match {{i + 1}}:
+          <br> {{ fixture.homeTeamStats.name}} VS {{ fixture.awayTeamStats.name }}</h1>
+        <h4 class="heading">Score:</h4>
+        <p class="score">{{ fixture.homeTeamStats.score}} - {{ fixture.awayTeamStats.score}}</p>
+        <h4 class="heading">Tries:</h4>
+        <p class="score">{{ fixture.homeTeamStats.tries}} - {{ fixture.awayTeamStats.tries}}</p>
+        <h4 class="heading">Conversions</h4>
+        <p class="score">{{ fixture.homeTeamStats.conversions}} - {{ fixture.awayTeamStats.conversions}}</p>
+        <h4 class="heading">Penalties</h4>
+        <p class="score">{{ fixture.homeTeamStats.penalties}} - {{ fixture.awayTeamStats.penalties }}</p>
+        <h1 class="header">The Victors Are: {{ fixture.victor }}</h1>
       </div>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+    </div>
+  </div>
+  <button ion-button (click)="return()" block>New Match</button>
 </ion-content>

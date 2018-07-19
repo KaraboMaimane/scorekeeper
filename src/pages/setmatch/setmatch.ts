@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Fixture } from '../../assets/match';
+import fixtures, { Fixture } from '../../assets/match';
 
 /**
  * Generated class for the SetmatchPage page.
@@ -14,11 +14,11 @@ import { Fixture } from '../../assets/match';
   selector: 'page-setmatch',
   templateUrl: 'setmatch.html',
 })
-export class SetmatchPage {
+export class SetmatchPage implements OnInit {
   awayTeamStats;
   homeTeamStats;
   victor: any;
-  fixtures = [];
+  fixtures = fixtures;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -27,13 +27,20 @@ export class SetmatchPage {
     console.log('ionViewDidLoad SetmatchPage');
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
+
+  }
+
+  ngOnInit() {
     this.homeTeamStats = this.navParams.get('homeTeamStats');
     this.awayTeamStats = this.navParams.get('awayTeamStats');
     this.victor = this.navParams.get('victor');
     let fixture = new Fixture(this.homeTeamStats, this.awayTeamStats, this.victor);
     this.fixtures.push(fixture);
     console.log(this.fixtures);
+  }
+  return() {
+    this.navCtrl.popToRoot();
   }
 
 }

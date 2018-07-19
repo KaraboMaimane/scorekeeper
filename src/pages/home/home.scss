@@ -24,7 +24,7 @@ page-home {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 65rem;
+        height: 95vh;
     }
 
     #container{
@@ -34,6 +34,17 @@ page-home {
     }
 
     .item-md{
+        padding: 0;
+        margin: 0;
+        background: rgba(255, 255, 255, 0.08);
+        border: none;
+        border-radius: .3rem;
+        height: 1rem;
+        color: white;
+        font-size: 2.5rem;
+    }
+
+    .item-ios{
         padding: 0;
         margin: 0;
         background: rgba(255, 255, 255, 0.08);

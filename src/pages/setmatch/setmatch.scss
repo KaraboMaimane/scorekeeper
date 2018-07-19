@@ -8,31 +8,37 @@ page-setmatch {
           background-size: cover;
         padding: 2rem;
     }
+    .cardflex{
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
     .heading, header{
-        font-size: 1.9rem;
+        font-size: 2rem;
         text-align: center;
-        padding-top: 2rem;
         letter-spacing: .4rem;
     }
 
-    ion-card.card.card-md{
-        background: rgba(255, 255, 255, 0.7);
+    div.content{
+        padding: .5rem;
+        color: rgb(53, 53, 53);
+        border: .3rem solid rgb(53, 53, 53);
+        margin: .5rem;
     }
     
     .score{
         text-align: center;
-        font-size: 8rem;
-        font-weight: 700;
-    }
-
-    .content{
-        padding: 3rem;
+        font-size: 1.5rem;
+        font-weight: 500;
     }
 
     .mainHeading{
         font-size: 4rem;
         text-align: center;
-        color: white;
-        
+        color: rgb(61, 61, 61);  
+    }
+
+    .wrapper{
+        background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(224, 224, 224, 0.9));
     }
 }

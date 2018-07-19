@@ -1,74 +1,119 @@
 page-match {
+    .contentflex{
+        background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(224, 224, 224, 0.9));
+        box-shadow: .5rem .1rem .7rem rgba(0, 0, 0, 0.575);
+        padding: .2rem;
+        border-radius: .4rem;
+    }
     ion-content{
-        background: url("../../assets/imgs/quino-al-517733-unsplash.jpg");
+        color: rgb(58, 58, 58) !important;
+        font-size: 10px !important;
+        background: url('../../assets/imgs/quino-al-517733-unsplash.jpg');
         background-size: cover;
-        backface-visibility: hidden;
-        animation: fd .6s ease-in-out;
+        
     }
-    #battle{
-        height: 13rem;
-        width: 8rem;
-    }
-
-    .heading{
-        text-align: center;
-        font-size: 3rem;
-        padding-top: 2rem;
-    }
-
-    .container{
+    .teamflex{
         display: flex;
+        flex-direction: row;
+        padding: .2rem;
         justify-content: center;
     }
-
-    #vs{
-       height: 15rem; 
-    }
-
-    .score{
-        font-size: 1.9rem;
-        text-align: center;
-        padding-top: 2rem;
-        letter-spacing: .4rem;
-    }
-
-    .scoreValue{
-        text-align: center;
-        font-size: 8rem;
-        font-weight: 700;
-    }
-
-    ion-card.card.card-md{
-        background: rgba(255, 255, 255, 0.95);
-    }
-
-    .contain{
-        text-align: center;
-        color: white;
-        background-color: rgba(0, 0, 0, 0.3);
-        height: 67.5rem;
+    .teamtextf{
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 2rem;
+        height: 10rem;
+    }
+    .vsText{
+        font-size: 2rem;
+        font-weight: 500;
+        letter-spacing: .2rem;
     }
 
-    .contain h1{
-        font-size: 3rem;
+    .vsLogo{
+        width: 20rem;
     }
-    .contain h2{
+
+    .advantage{
+        text-align: center;
         font-size: 2rem;
         text-transform: uppercase;
-        font-weight: 600;
-    }
-
-    .subScore{
-        text-align: center;
-        font-size: 3rem;
+        letter-spacing: .3rem;
         font-weight: 500;
     }
 
-    .side{
-        font-size: 6rem;
+    .imageflex{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .clash{
+        width: 10rem;
+        transition: all ease .4s;
+        padding: .5rem;
+    }
+
+    .clash:hover{
+        background: rgba(0, 0, 255, 0.5);
+        transform: translateY(-.4rem);
+        transform: scale(1.1);
+        box-shadow: 0 .5rem .3rem 0 rgba(0, 0, 0, 0.5);
+    }
+    .clash:active{
+        background: rgba(0, 0, 255, 0.5);
+        transform: translateY(.2rem);
+        transform: scale(1.0);
+        box-shadow: 0 .2rem .6rem 0 rgba(0, 0, 0, 0.5);
+    }
+
+    .scoreFlex{
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: row;
+    }
+
+    .score{
+        font-size: 4rem;
+    }
+
+    .detailText{
+        font-size: 1.4rem;
+    }
+
+    .tries{
+        font-size: 2rem;
+    }
+
+    .triesText{
+        font-size: 2rem;
+    }
+
+    .mainScoreText{
+        text-transform: uppercase;
+        letter-spacing: .5rem;
+    }
+
+    .detailsflex{
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .buttonflex{
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    button{
+        transition: all ease .2s !important;
+    }
+
+    button:hover{
+        transform: translateY(-.3rem);
+        box-shadow: 0 .6rem .3rem 0 rgba(0, 0, 0, 0.5);
+    }
+
+    button:active{
+        transform: translateY(0rem);
+        box-shadow: 0 .1rem .6rem 0 rgba(0, 0, 0, 0.5);
     }
 }

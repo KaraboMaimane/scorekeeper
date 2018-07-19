@@ -21,15 +21,6 @@ export class HomePage {
     this.awayTeam = event.target.value;
   }
 
-  somePropertyAss(){
-    
-    if(this.someProperty != true){
-      this.someProperty = true;
-    }else{
-      this.someProperty = false;
-    }
-  }
-
   submit(){
     this.navCtrl.push(MatchPage,{
       home: this.homeTeam,

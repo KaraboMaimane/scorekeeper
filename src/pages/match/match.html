@@ -1,70 +1,74 @@
-<!--
-  Generated template for the MatchPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar color="primary">
-    <ion-title>Match Day</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
 <ion-content padding>
-  <ion-grid>
-    <ion-row>
-      <ion-col col-xs-12 col-sm-12 col-md-4 col-lg-4>
-        <ion-card>
-          <h1 class="heading">{{ home }}</h1>
-          <div class="container">
-            <img src="../../assets/imgs/rugby-sport-silhouette-2.png" [class.active]="selected == 'home'" (click)="selectHome()" id="battle">
-          </div>
-          <ion-card-content>
-            <h2 class="score">Score</h2>
-            <p class="scoreValue">{{ homeVal }}</p>
-            <h2 class="score">Tries</h2>
-            <p class="subScore">{{ homeTries }}</p>
-            <h2 class="score">Conversions</h2>
-            <p class="subScore">{{ homeConversions }}</p>
-            <h2 class="score">Penalties</h2>
-            <p class="subScore">{{ homePenalties }}</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col col-xs-12 col-sm-12 col-md-4 col-lg-4>
-        <div class="contain">
-          <div class="img">
-              <img src="../../assets/imgs/vsfasfsdfsdapn.png" id="vs" alt="">
-              <h1>Advantage:</h1>
-              <h2 style="font-size: 4rem;">{{ selected }}</h2>
-              <button ion-button block color="secondary" (click)="scoreTry()">Try</button> <br>
-            <button ion-button block color="primary" (click)="penalty()">Penalty</button> <br>
-            <button ion-button block color="danger" (click)="undo()">Undo</button><br>
-            <button ion-button block color="light" (click)="end()">End Match</button>
-          </div>
-        </div>
-      </ion-col>
-      <ion-col col-xs-12 col-sm-12 col-md-4 col-lg-4>
-        <ion-card>
-          <h1 class="heading">{{ away }}</h1>
-          <div class="container">
-            <img src="../../assets/imgs/rugby-sport-silhouette-5s.png" (click)="selectAway()" id="battle">
-          </div>
-          <ion-card-content>
-            <h3 class="score">Score</h3>
-            <p class="scoreValue">{{ awayVal }}</p>
-            <h2 class="score">Tries</h2>
-            <p class="subScore">{{ awayTries }}</p>
-            <h2 class="score">Conversions</h2>
-            <p class="subScore">{{ awayConversions }}</p>
-            <h2 class="score">Penalties</h2>
-            <p class="subScore">{{ awayPenalties }}</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div class="contentflex">
+    <div class="teamflex">
+      <div class="teamtextf">
+        <p class="vsText">{{homeTeam}}</p>
+      </div>
+      <img src="../../assets/imgs/vsfasfsdfsdapn.png" alt="" class="vsLogo">
+      <div class="teamtextf">
+        <p class="vsText">{{awayTeam}}</p>
+      </div>
+    </div>
+    <p class="advantage">{{team}}</p>
+    <div class="imageflex">
+      <div class="imagecontainer">
+        <img src="../../assets/imgs/rugby-sport-silhouette-2.png" alt="" class="clash" (click)="team = 'home'">
+      </div>
+      <div class="imagecontainer">
+        <img src="../../assets/imgs/rugby-sport-silhouette-5s.png" alt="" class="clash" (click)="team = 'away'">
+      </div>
+    </div>
+    <div class="scoreFlex">
+      <div class="score">
+        <p class="mainScore">{{homeScore}}</p>
+      </div>
+      <div class="score">
+        <p class="mainScoreText">Score</p>
+      </div>
+      <div class="score">
+        <p class="mainScore">{{awayScore}}</p>
+      </div>
+    </div>
+    <div class="detailsflex">
+      <div class="details">
+        <p>
+          <ion-badge color="primary">{{ homeTries }}</ion-badge>
+          <span class="detailText">Tries</span>
+          <br>
+          <ion-badge color="primary">{{ homePenalties }}</ion-badge>
+          <span class="detailText">Penalties</span>
+          <br>
+          <ion-badge color="primary">{{ homeConversion }}</ion-badge>
+          <span class="detailText">Conversions</span>
+        </p>
+      </div>
+      <div class="details">
+        <p>
+          <ion-badge color="secondary">{{ awayTries }}</ion-badge>
+          <span class="detailText">Tries</span>
+          <br>
+          <ion-badge color="secondary">{{ awayPenalties }}</ion-badge>
+          <span class="detailText">Penalties</span>
+          <br>
+          <ion-badge color="secondary">{{ awayConversion }}</ion-badge>
+          <span class="detailText">Conversions</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="buttonflex">
+    <button ion-button block (click)="checkTry()">Try</button>
+    <button ion-button color="dark" (click)="undoTry()">Undo</button>
+  </div>
+  <div class="buttonflex">
+    <button ion-button block (click)="checkPenalty()">Penalty</button>
+    <button ion-button color="dark" (click)="undoPenalty()">Undo</button>
+  </div>
+  <div class="buttonflex">
+    <button ion-button block (click)="checkConversion()">Conversion</button>
+    <button ion-button color="dark" (click)="undoConversion()">Undo</button>
+  </div>
+  <div class="buttonflex">
+    <button ion-button block color="danger" (click)="endMatch()">End Match</button>
+  </div>
 </ion-content>
